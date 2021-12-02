@@ -235,7 +235,10 @@ class CreditCardForm extends StatelessWidget {
               const SizedBox(height: 16),
               TextFormField(
                 textCapitalization: TextCapitalization.words,
-                inputFormatters: [LengthLimitingTextInputFormatter(24)],
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[A-Z]')),
+                  LengthLimitingTextInputFormatter(24)
+                ],
                 onChanged: (newVal) =>
                     Provider.of<CreditCardModel>(context, listen: false)
                         .setName(newVal.toUpperCase()),
@@ -261,7 +264,7 @@ class CreditCardForm extends StatelessWidget {
                         isExpanded: true,
                         underline: const SizedBox(),
                         hint: const Text("Month"),
-                        items: <String>["01", "02", "03", "04", "05", "06", "07", "08", "9", "10", "11", "12"]
+                        items: <String>["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
                             .map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,

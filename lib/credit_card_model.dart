@@ -23,7 +23,7 @@ class CreditCardModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setCardBrand() {
+  void _setCardBrand() {
     if (number.startsWith('4')) {
       logo = Image.asset('assets/images/visa.png');
       mask = "#### #### #### ####";
@@ -52,15 +52,14 @@ class CreditCardModel extends ChangeNotifier {
       cvvMask = "XXX";
     }
 
-    if (cvv.startsWith('X')) {
+    if (cvv.startsWith('X') || cvv.length > cvvMask.length) {
       cvv = cvvMask;
     }
-    notifyListeners();
   }
 
   void setNumber(String newVal) {
     number = newVal + mask.substring(newVal.length);
-    setCardBrand();
+    _setCardBrand();
     notifyListeners();
   }
 
